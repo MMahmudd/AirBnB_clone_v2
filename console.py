@@ -128,15 +128,8 @@ class HBNBCommand(cmd.Cmd):
         my_list = line.split(" ")
         kwargs = {}
         for i in range(1, len(my_list)):
-            key, value = tuple(my_list[i].split("="))
-            if value[0] == '"':
-                value = value.strip('"').replace("_", " ")
-            else:
-                try:
-                    value = eval(value)
-                except (SyntaxError, NameError):
-                    continue
-            kwargs[key] = value
+            # Your parameter processing code here
+            # ...
         if kwargs == {}:
             obj = eval(args)()
         else:
@@ -147,7 +140,7 @@ class HBNBCommand(cmd.Cmd):
     except Exception as e:
         print(f"An error occurred: {e}")
         return
-
+    
     def help_create(self):
         """ Help information for the create method """
         print("Creates a class of any type")
