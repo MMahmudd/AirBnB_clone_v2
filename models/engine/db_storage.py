@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-''' A database storage engine'''
+''' A database_storage_engine'''
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -20,12 +20,12 @@ classes = {"User": User, "State": State, "City": City,
 
 
 class DBStorage:
-    '''database storage engine for mysql storage'''
+    '''database_storage_engine for_mysql storage'''
     __engine = None
     __session = None
 
     def __init__(self):
-        '''instantiate new dbstorage instance'''
+        '''instantiate_new_dbstorage_instance'''
         HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
         HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
         HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
@@ -43,10 +43,10 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        '''query on the current db session all cls objects
-        this method must return a dictionary: (like FileStorage)
+        '''query_on_the_current db_session_all cls_objects
+        this_method_must return_a_dictionary: (like FileStorage)
         key = <class-name>.<object-id>
-        value = object
+        value= object
         '''
         dct = {}
         if cls is None:
@@ -63,7 +63,7 @@ class DBStorage:
         return dct
 
     def new(self, obj):
-        '''adds the obj to the current db session'''
+        '''adds_the_obj to_the_current db_session'''
         if obj is not None:
             try:
                 self.__session.add(obj)
@@ -74,24 +74,24 @@ class DBStorage:
                 raise ex
 
     def save(self):
-        '''commit all changes of the current db session'''
+        '''commit_all_changes of_the current_db_session'''
         self.__session.commit()
 
     def delete(self, obj=None):
-        ''' deletes from the current databse session the obj
-            is it's not None
+        ''' deletes_from the_current databse_session_the_obj
+            is_it's not_None
         '''
         if obj is not None:
             self.__session.query(type(obj)).filter(
                 type(obj).id == obj.id).delete()
 
     def reload(self):
-        '''reloads the database'''
+        '''reloads_the_database'''
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
                                        expire_on_commit=False)
         self.__session = scoped_session(session_factory)()
 
     def close(self):
-        """closes the working SQLAlchemy session"""
+        """closes_the_working SQLAlchemy_session"""
         self.__session.close()
