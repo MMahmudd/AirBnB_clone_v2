@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a base class for all models in our hbnb clone"""
+"""This_module defines_a_base class_for all_models in_our hbnb_clone"""
 import uuid
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
@@ -10,12 +10,12 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """A base class for all hbnb models
+    """A base_class for_all hbnb_models
 
-    Attributes:
-        id (sqlalchemy String): The BaseModel id.
-        created_at (sqlalchemy DateTime): The datetime at creation.
-        updated_at (sqlalchemy DateTime): The datetime of last update.
+    Attribute:
+        id (sqlalchemy String):_The BaseModel_id.
+        created at (sqlalchemy DateTime): The_datetime at creation.
+        updated at (sqlalchemy DateTime): The_datetime of_last_update.
     """
     id = Column(String(60),
                 nullable=False,
@@ -29,7 +29,7 @@ class BaseModel:
                         default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
-        """Instatntiates a new model"""
+        """Instatntiates_a new_model"""
         if not kwargs:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -49,19 +49,19 @@ class BaseModel:
                     setattr(self, 'updated_at', datetime.now())
 
     def __str__(self):
-        """Returns a string representation of the instance"""
+        """Returns_a_string_representation of_the_instance"""
         return '[{}] ({}) {}'.format(
             self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        """Updates updated_at with current time when instance is changed"""
+        """Updates_updated_at with_current time when_instance is_changed"""
         from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
 
     def to_dict(self):
-        """Convert instance into dict format"""
+        """Convert_instance into_dict_format"""
         dct = self.__dict__.copy()
         dct['__class__'] = self.__class__.__name__
         for k in dct:
@@ -72,6 +72,6 @@ class BaseModel:
         return dct
 
     def delete(self):
-        '''deletes the current instance from the storage'''
+        '''deletes_the_current instance_from the_storage'''
         from models import storage
         storage.delete(self)
