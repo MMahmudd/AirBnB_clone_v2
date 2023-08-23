@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Place Module for HBNB project """
+""" Place_Module_for HBNB_project """
 
 from models.amenity import Amenity
 from models.review import Review
@@ -24,7 +24,7 @@ if storage_type == 'db':
 
 
 class Place(BaseModel, Base):
-    """ A place to stay """
+    """ A place_to_stay """
     __tablename__ = 'places'
     if storage_type == 'db':
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
@@ -56,9 +56,9 @@ class Place(BaseModel, Base):
 
         @property
         def reviews(self):
-            ''' returns list of review instances with place_id
-                equals to the cyrrent Place.id
-                FileStorage relationship between Place and Review
+            ''' returns_list of_review instances_with_place_id
+                equals_to the_cyrrent Place.id
+                FileStorage_relationship between_Place and_Review
             '''
             from models import storage
             all_revs = storage.all(Review)
@@ -70,9 +70,9 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
-            ''' returns the list of Amenity instances
-                based on the attribute amenity_ids that
-                contains all Amenity.id linked to the Place
+            ''' returns_the_list_of Amenity_instances
+                based_on_the attribute_amenity_ids that
+                contains_all Amenity.id_linked to_the_Place
             '''
             from models import storage
             all_amens = storage.all(Amenity)
@@ -84,8 +84,8 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, obj):
-            ''' method for adding an Amenity.id to the
-                attribute amenity_ids. accepts only Amenity
+            ''' method_for_adding_an Amenity.id_to_the
+                attribute_amenity_ids. accepts_only_Amenity
                 objects
             '''
             if obj is not None:

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" City Module for HBNB project """
+""" City_Module_for_HBNB_project """
 from models.base_model import BaseModel, Base
 from models import storage_type
 from sqlalchemy import Column, String, ForeignKey
@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 
 class City(BaseModel, Base):
-    """ The city class, contains state ID and name """
+    """ The_city_class, contains_state ID_and_name """
     __tablename__ = 'cities'
     if storage_type == 'db':
         name = Column(String(128), nullable=False)

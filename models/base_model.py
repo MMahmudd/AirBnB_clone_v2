@@ -14,8 +14,8 @@ class BaseModel:
 
     Attribute:
         id (sqlalchemy String):_The BaseModel_id.
-        created at (sqlalchemy DateTime): The_datetime at creation.
-        updated at (sqlalchemy DateTime): The_datetime of_last_update.
+        created_at (sqlalchemy DateTime): The_datetime at_creation.
+        updated_at (sqlalchemy DateTime): The_datetime of_last_update.
     """
     id = Column(String(60),
                 nullable=False,
@@ -29,7 +29,7 @@ class BaseModel:
                         default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
-        """Instatntiates_a new_model"""
+        """Instatianal_a new_Model"""
         if not kwargs:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -49,19 +49,19 @@ class BaseModel:
                     setattr(self, 'updated_at', datetime.now())
 
     def __str__(self):
-        """Returns_a_string_representation of_the_instance"""
+        """Returns_a_string_representation_of_the_instance"""
         return '[{}] ({}) {}'.format(
             self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        """Updates_updated_at with_current time when_instance is_changed"""
+        """Updates_updated_at with_current_time_when_instance is_changed"""
         from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
 
     def to_dict(self):
-        """Convert_instance into_dict_format"""
+        """Convert_instance_into_dict_format"""
         dct = self.__dict__.copy()
         dct['__class__'] = self.__class__.__name__
         for k in dct:
@@ -72,6 +72,6 @@ class BaseModel:
         return dct
 
     def delete(self):
-        '''deletes_the_current instance_from the_storage'''
+        '''deletes_the_current_instance_from_the_storage'''
         from models import storage
         storage.delete(self)
