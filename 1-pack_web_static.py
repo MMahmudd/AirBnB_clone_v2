@@ -5,7 +5,8 @@ from datetime import date
 
 
 def do_pack():
-    """ A script_that generates_ar advance.chive the_contents of_web_static_folder"""
+    """ A script_that generates_ar advance.chive
+    the_contents of_web_static_folder"""
 
     filename = strftime("%Y%m%d%H%M%S")
     try:
