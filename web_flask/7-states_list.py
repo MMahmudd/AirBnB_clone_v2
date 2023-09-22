@@ -14,7 +14,8 @@ def display_states():
 
 @app.teardown_appcontext
 def close_db_session(exception):
-    """Method_to_remove the_current SQLAlchemy Session_after each_request."""
+    """Method_to_remove the_current SQLAlchemy Session_after
+    each_request."""
     storage.close()
 
 if __name__ == "__main__":
