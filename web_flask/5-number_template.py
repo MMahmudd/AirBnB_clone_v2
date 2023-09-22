@@ -1,45 +1,47 @@
 #!/usr/bin/python3
-"""script_that_starts a Flask web_application"""
-from flask import Flask, escape, render_template
+"""A_Flask"""
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def route():
-    """Return_two_words"""
+def hello():
+    """Return_a_given_string"""
     return "Hello HBNB!"
 
 
 @app.route('/hbnb', strict_slashes=False)
-def route_hbnb():
-    """Return_a_word"""
+def hbnb():
+    """Returns_a_given_string"""
     return "HBNB"
 
 
-@app.route('/c/<path:subpath>', strict_slashes=False)
-def route_c(subpath):
-    """Return_subpath"""
-    return "C {}".format(escape(subpath).replace('_', ' '))
+@app.route('/c/<text>', strict_slashes=False)
+def cText(text):
+    """display C followed_by_the value_of the_text_variable"""
+    return "C {}".format(text.replace("_", " "))
 
 
-@app.route('/python', defaults={'subpath': 'is cool'}, strict_slashes=False)
-@app.route('/python/<path:subpath>', strict_slashes=False)
-def route_python(subpath):
-    """Return_subpath"""
-    return "Python {}".format(escape(subpath).replace('_', ' '))
+@app.route('/python', strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def pythonText(text="is cool"):
+    """display_Python followed_by the_value_of the_text_variable"""
+    return "Python {}".format(text.replace("_", " "))
 
 
-@app.route('/number/<int:num>', strict_slashes=False)
-def route_number(num):
-    """Return_only_if_num is_a_int"""
-    return "{} is a number".format(escape(num))
+@app.route('/number/<int:n>', strict_slashes=False)
+def isNumber(n):
+    """display n is_a_number_only if n is_an_integer"""
+    if isinstance(n, int):
+        return "{} is a number".format(n)
 
 
-@app.route('/number_template/<int:num>', strict_slashes=False)
-def route_template(num):
-    """Return a file HTML only_if_num is_a_int"""
-    return render_template("5-number.html", n=num)
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def number_template(n=None):
+    """display_a HTML_page only_if n is_an_integer"""
+    if isinstance(n, int):
+        return render_template("5-number.html", n=n)
 
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == "__main__":
+    app.run()
