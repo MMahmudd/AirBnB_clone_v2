@@ -1,46 +1,45 @@
 #!/usr/bin/python3
-"""
-A_Flask web_application with_routes for_Task 5.
-"""
-
-from flask import Flask, render_template
-from flask import abort
-
+"""script_that_starts a Flask web_application"""
+from flask import Flask, escape, render_template
 app = Flask(__name__)
 
+
 @app.route('/', strict_slashes=False)
-def hello_hbnb():
-    """Display 'Hello HBNB!' when_accessing_the_root URL."""
+def route():
+    """Return_two_words"""
     return "Hello HBNB!"
 
+
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    """Display 'HBNB' when_accessing_the /hbnb URL."""
+def route_hbnb():
+    """Return_a_word"""
     return "HBNB"
 
-@app.route('/c/<text>', strict_slashes=False)
-def c_is_fun(text):
-    """Display 'C ' followed_by the_value_of the_text_variable."""
-    return "C " + text.replace('_', ' ')
 
-@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
-@app.route('/python/<text>', strict_slashes=False)
-def python_is_cool(text):
-    """Display 'Python ' followed_by the value_of the_text_variable."""
-    return "Python " + text.replace('_', ' ')
+@app.route('/c/<path:subpath>', strict_slashes=False)
+def route_c(subpath):
+    """Return_subpath"""
+    return "C {}".format(escape(subpath).replace('_', ' '))
 
-@app.route('/number/<int:n>', strict_slashes=False)
-def is_number(n):
-    """Display 'n is a number' only_if n is_an_integer."""
-    return "{} is a number".format(n)
 
-@app.route('/number_template/<int:n>', strict_slashes=False)
-def number_template(n):
-    """Display_an HTML page_with 'Number: n' if n is_an_integer."""
-    if isinstance(n, int):
-        return render_template('5-number.html', n=n)
-    else:
-        abort(404)
+@app.route('/python', defaults={'subpath': 'is cool'}, strict_slashes=False)
+@app.route('/python/<path:subpath>', strict_slashes=False)
+def route_python(subpath):
+    """Return_subpath"""
+    return "Python {}".format(escape(subpath).replace('_', ' '))
 
-if __name__ == "__main__":
+
+@app.route('/number/<int:num>', strict_slashes=False)
+def route_number(num):
+    """Return_only_if_num is_a_int"""
+    return "{} is a number".format(escape(num))
+
+
+@app.route('/number_template/<int:num>', strict_slashes=False)
+def route_template(num):
+    """Return a file HTML only_if_num is_a_int"""
+    return render_template("5-number.html", n=num)
+
+
+if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
