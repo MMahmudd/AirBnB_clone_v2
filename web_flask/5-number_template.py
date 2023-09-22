@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """
-A Flask web_application with_routes for_Task 5.
+A_Flask web_application with_routes for_Task 5.
 """
 
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template
 from flask import abort
 
 app = Flask(__name__)
@@ -21,18 +20,18 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def c_is_fun(text):
-    """Display 'C ' followed_by thevalue_of the_text_variable."""
+    """Display 'C ' followed_by the_value_of the_text_variable."""
     return "C " + text.replace('_', ' ')
 
 @app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_is_cool(text):
-    """Display 'Python ' followed_by_the_value of_the_text_variable."""
+    """Display 'Python ' followed_by the value_of the_text_variable."""
     return "Python " + text.replace('_', ' ')
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def is_number(n):
-    """Display 'n is_a number' only_if n is_an_integer."""
+    """Display 'n is a number' only_if n is_an_integer."""
     return "{} is a number".format(n)
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
