@@ -7,8 +7,8 @@ from flask import Flask
 
 app = Flask(__name__)
 
-
-@app.route('/', strict_slashes=False)
+# comments
+@app.route('/airbnb-onepage/', strict_slashes=False)
 def hello_hbnb():
     """Display 'Hello HBNB!' when_accessing_the root URL."""
     return "Hello HBNB!"
